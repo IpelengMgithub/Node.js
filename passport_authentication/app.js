@@ -15,10 +15,13 @@ mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology:true})
 app.use(expressLayouts);
 app.set('view engine','ejs')
 
+// bodyparser
+app.use(express.urlencoded({extended : false}));
+
 // routes 
 app.use('/', require('./routes/index'));
 app.use('/user', require('./routes/user'));
 
-const portNumber = process.env.portNumber || 8000;
+const portNumber = process.env.portNumber || 8015;
 
 app.listen(portNumber, console.log(`running server on port ${portNumber}`));
