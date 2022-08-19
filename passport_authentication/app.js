@@ -1,20 +1,21 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose'); 
+const dotenv = require('dotenv');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 
 const app = express();
 
+dotenv.config();
+
 // Passport Config
 require('./config/passport')(passport);
 
-//db connect
-const db = require('./config/keys').MongoURI;
 
 //connecting to mongo 
-mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology:true})
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology:true})
     .then(() => console.log('mongo database connected..'))
     .catch(err => console.log(err));
 
